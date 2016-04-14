@@ -1,5 +1,0 @@
-#!/bin/sh
-
-if [ $# == 1 ];then
-    pisi sr $1 --name | awk '{print  $1}' | sort
-fi
