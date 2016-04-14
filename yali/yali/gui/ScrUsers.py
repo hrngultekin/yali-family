@@ -13,7 +13,7 @@ import gettext
 import pardus.xorg
 _ = gettext.translation('yali', fallback=True).ugettext
 
-from PyQt5.Qt import QWidget, pyqtSignal, QIcon, QTimeLine, QPixmap, QLineEdit, QListWidgetItem, QFocusEvent 
+from PyQt5.Qt import QWidget, pyqtSignal, QIcon, QTimeLine, QPixmap, QLineEdit, QListWidgetItem#, QFocusEvent 
 
 import yali.users
 import yali.postinstall
@@ -63,15 +63,20 @@ class Widget(QWidget, ScreenWidget):
         self.ui.pass2.returnPressed.connect(self.slotReturnPressed)
 
         #focusInEvent is not a signal
-        self.ui.pass1.focusInEvent[QFocusEvent].connect(self.checkCapsLock) 
-        self.ui.pass2.focusInEvent[QFocusEvent].connect(self.checkCapsLock)
-        self.ui.username.focusInEvent[QFocusEvent].connect(self.checkCapsLock)
-        self.ui.realname.focusInEvent[QFocusEvent].connect(self.checkCapsLock)
+        #self.ui.pass1.focusInEvent[QFocusEvent].connect(self.checkCapsLock) 
+        #self.ui.pass2.focusInEvent[QFocusEvent].connect(self.checkCapsLock)
+        #self.ui.username.focusInEvent[QFocusEvent].connect(self.checkCapsLock)
+        #self.ui.realname.focusInEvent[QFocusEvent].connect(self.checkCapsLock)
 
         ctx.installData.users = []
         ctx.installData.autoLoginUser = None
         self.user_name_changed = False
         self.used_ids = []
+
+    def eventFilter(self,obj,event):
+        if even.type()==QEvent.FocusIn:
+            if obj== self.ui.pass1 or obj==self.ui.pass2 or obj==self.ui.username or obj == self.ui.realname:
+                self.checkCapsLock()
 
     def shown(self):
         self.ui.cancelButton.hide()

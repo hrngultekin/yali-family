@@ -25,5 +25,6 @@ class Widget(QWidget, ScreenWidget):
         self.networkConnector._proc.terminate()
         ctx.mainScreen.disableBack()
         return True
+    
 
 

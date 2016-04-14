@@ -59,10 +59,10 @@ class Runner():
         self._translator.load("qt_" + QLocale.system().name(), QLibraryInfo.location(QLibraryInfo.TranslationsPath))
 
         ctx.mainScreen = self._window
-
+        
         screens = self._get_screens(ctx.flags.install_type)
         self._set_steps(screens)
-
+        
         # These shorcuts for developers :)
         prevScreenShortCut = QShortcut(QKeySequence(Qt.SHIFT + Qt.Key_F1), self._window)
         nextScreenShortCut = QShortcut(QKeySequence(Qt.SHIFT + Qt.Key_F2), self._window)
@@ -113,6 +113,7 @@ class Runner():
                 found = imp.find_module(module_name, yali.gui.__path__)
                 loaded = imp.load_module(module_name, *found)
                 screenClass = loaded.__dict__["Widget"]
+                
             except ImportError, msg:
                 ctx.logger.debug(msg)
                 rc = ctx.interface.messageWindow(_("Error!"),
@@ -121,22 +122,24 @@ class Runner():
                                                    "component.\n\nclassName = %s.Widget") % module_name,
                                                  type="custom", customIcon="warning",
                                                  customButtons=[_("Exit"), _("Retry")])
+                
                 if not rc:
                     sys.exit(1)
             else:
                 screens.append(screenClass)
-
+        
         return screens
 
 
     def _set_steps(self, screens):
         self._window.createWidgets(screens)
         self._window.setCurrent(ctx.flags.startup)
+        
 
     def run(self):
         # Use default theme;
         # if you use different Qt4 theme our works looks ugly :)
-        self._application.setStyle(QStyleFactory.create('Plastique'))
+        self._application.setStyle(QStyleFactory.create('Brezee'))
         self._init_screen()
 
         self._application.installTranslator(self._translator)

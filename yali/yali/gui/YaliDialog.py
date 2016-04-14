@@ -112,11 +112,15 @@ class Dialog(QDialog):
 
         if widget:
             self.addWidget(widget)
-            widget.finished[int].connect(self.reject)
             try:
-                widget.resizeDialog[int,int].connect(self.resize)
+                widget.finished[int].connect(self.reject)
             except:
                 pass
+            finally:
+                try:
+                    widget.resizeDialog[int,int].connect(self.resize)
+                except:
+                    pass
             
 
         if closeButton:

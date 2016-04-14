@@ -84,7 +84,6 @@ class Widget(QWidget):
     def __init__(self):
         QWidget.__init__(self, None)
         # Set pixmaps resource before Main Window initialized
-        print ctx.consts.theme_dir, ctx.flags.theme, ctx.consts.pixmaps_resource_file
         self._resource = os.path.join(ctx.consts.theme_dir, ctx.flags.theme, ctx.consts.pixmaps_resource_file)
         if os.path.exists(self._resource):
             resource = QResource()
@@ -375,6 +374,7 @@ class Widget(QWidget):
             #    weave_all_object_methods(ctx.aspect, screen)
 
             # enable navigation buttons before shown
+            print screen
             weave_object_method(enableNavButtonsAspect, screen, "shown")
             # disable navigation buttons before the execute.
             weave_object_method(disableNavButtonsAspect, screen, "execute")

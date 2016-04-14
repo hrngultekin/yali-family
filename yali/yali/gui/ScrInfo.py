@@ -19,7 +19,7 @@ from yali.gui.Ui.info import Ui_InfoWidget
 
 class Widget(QWidget, ScreenWidget):
     name = "info"
-
+    finished=pyqtSignal()
     def __init__(self):
         QWidget.__init__(self)
         self.ui = Ui_InfoWidget()
@@ -27,3 +27,6 @@ class Widget(QWidget, ScreenWidget):
 
     def shown(self):
         ctx.mainScreen.disableBack()
+
+    def destroyed(self):
+        self.finished.emit()

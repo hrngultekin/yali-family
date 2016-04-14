@@ -27,7 +27,7 @@ from yali.gui.Ui.rootpasswidget import Ui_RootPassWidget
 
 class Widget(QWidget, ScreenWidget):
     name = "admin"
-
+    finished=pyqtSignal()
     def __init__(self):
         QWidget.__init__(self)
         self.ui = Ui_RootPassWidget()
@@ -115,6 +115,7 @@ class Widget(QWidget, ScreenWidget):
             else:
                 ctx.mainScreen.step_increment = 1
             ctx.mainScreen.slotNext(dry_run=True)
+            self.finished.emit()
         else:
             ctx.mainScreen.enableBack()
 

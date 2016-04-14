@@ -14,7 +14,7 @@ import parted
 import gettext
 _ = gettext.translation('yali', fallback=True).ugettext
 
-from PyQt5.Qt import QWidget, pyqtSignal, QMenu, QTreeWidgetItem, QIcon
+from PyQt5.Qt import QWidget, pyqtSignal, QMenu, QTreeWidgetItem, QIcon, QAction
 
 import yali.util
 import yali.context as ctx

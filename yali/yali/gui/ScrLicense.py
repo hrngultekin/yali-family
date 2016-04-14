@@ -23,7 +23,7 @@ from yali.gui.Ui.license import Ui_LicenseWidget
 
 class Widget(QWidget, ScreenWidget):
     name = "license"
-
+    finished=pyqtSignal()
     def __init__(self):
         QWidget.__init__(self)
         self.ui = Ui_LicenseWidget()
@@ -52,6 +52,9 @@ class Widget(QWidget, ScreenWidget):
         else:
             ctx.mainScreen.disableNext()
         ctx.mainScreen.processEvents()
+        
+    def destroyed(self):
+        self.finished.emit()
 
 class LicenseBrowser(QTextBrowser):
 

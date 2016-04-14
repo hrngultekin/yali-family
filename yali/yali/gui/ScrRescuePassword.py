@@ -14,7 +14,7 @@ import pardus.xorg
 import gettext
 _ = gettext.translation('yali', fallback=True).ugettext
 
-from PyQt5.Qt import QWidget, pyqtSignal, QListWidgetItem, QIcon, QLineEdit,QFocusEvent
+from PyQt5.Qt import QWidget, pyqtSignal, QListWidgetItem, QIcon, QLineEdit#,QFocusEvent
 
 import yali.util
 import yali.context as ctx
@@ -32,9 +32,14 @@ class Widget(QWidget, ScreenWidget):
         self.ui.users.currentItemChanged[QListWidgetItem, QListWidgetItem].connect(self.refresh)
         self.ui.password.textChanged[str].connect(self.slotTextChanged)
         self.ui.confirm.textChanged[str].connect(self.slotTextChanged)
-        self.ui.password.focusInEvent[QFocusEvent].connect(self.checkCapsLock)
-        self.ui.confirm.focusInEvent[QFocusEvent].connect(self.checkCapsLock)
+        #self.ui.password.focusInEvent[QFocusEvent].connect(self.checkCapsLock)
+        #self.ui.confirm.focusInEvent[QFocusEvent].connect(self.checkCapsLock)
         self.ui.resetPassword.clicked.connect(self.slotResetPassword)
+
+    def eventFilter(self,obj,event):
+        if even.type()==QEvent.FocusIn:
+            if obj== self.ui.password or obj==self.ui.confirm:
+                self.checkCapsLock()
 
     def refresh(self, current, previous):
         self.ui.password.clear()

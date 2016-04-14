@@ -247,7 +247,7 @@ class Widget(QWidget, ScreenWidget):
         self.timer.stop()
         self.poll_timer.stop()
         return True
-
+    
     def finished(self):
         self.poll_timer.stop()
 

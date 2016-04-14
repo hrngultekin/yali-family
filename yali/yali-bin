@@ -251,7 +251,6 @@ def main():
     
     ctx.flags.parse_kernel_options(ctx)
     
-    
     init_gui_runner()
 
 
