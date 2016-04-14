@@ -176,12 +176,12 @@ class Widget(QWidget, ScreenWidget):
             return
 
 
-        if not hostname.toAscii():
+        if not hostname:
             self.host_valid = False
             self.update()
             return
 
-        self.host_valid = yali.util.is_text_valid(hostname.toAscii())
+        self.host_valid = yali.util.is_text_valid(hostname)
 
         if not self.host_valid:
             self.intf.informationWindow.update(_('Hostname contains invalid characters.'), type="error")

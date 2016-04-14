@@ -86,7 +86,7 @@ class Widget(QWidget, ScreenWidget):
         subject = "<p><li><b>%s</b></li><ul>"
         item    = "<li>%s</li>"
         end     = "</ul></p>"
-        content = QString("")
+        content = ""
 
         content.append("""<html><body><ul>""")
 

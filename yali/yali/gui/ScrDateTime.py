@@ -189,7 +189,7 @@ class Widget(QWidget, ScreenWidget):
             self.timer.stop()
 
         index = self.ui.countryList.currentIndex()
-        ctx.installData.timezone = self.ui.countryList.itemData(index).toString()
+        ctx.installData.timezone = self.ui.countryList.itemData(index)
         ctx.logger.debug("Time zone selected as %s " % ctx.installData.timezone)
 
         if ctx.flags.install_type == ctx.STEP_BASE:

@@ -87,7 +87,7 @@ class Widget(QWidget, ScreenWidget):
                 if "wheel" in u.groups:
                     pix = self.super_user_icon
                 UserItem(self.ui.userList, pix, user = u)
-                self.ui.autoLogin.addItem(QString(u.username))
+                self.ui.autoLogin.addItem(u.username)
         if len(yali.users.PENDING_USERS) == 1:
             self.slotEditUser(self.ui.userList.item(0))
         elif len(yali.users.PENDING_USERS) > 1:
@@ -236,7 +236,7 @@ class Widget(QWidget, ScreenWidget):
 
     def slotCreateUser(self):
         user = yali.users.User()
-        user.username = str(self.ui.username.text().toAscii())
+        user.username = str(self.ui.username.text())
         # ignore last character. see bug #887
         user.realname = unicode(self.ui.realname.text())
         user.passwd = unicode(self.ui.pass1.text())
@@ -285,7 +285,7 @@ class Widget(QWidget, ScreenWidget):
         item = UserItem(self.ui.userList, pix, user=user)
 
         # add user to auto-login list.
-        self.ui.autoLogin.addItem(QString(user.username))
+        self.ui.autoLogin.addItem(user.username)
 
         if update_item:
             self.ui.autoLogin.setCurrentIndex(self.ui.autoLogin.count())
@@ -330,10 +330,10 @@ class Widget(QWidget, ScreenWidget):
         if user.uid > -1:
             self.ui.userIDCheck.setChecked(True)
             self.ui.userID.setValue(user.uid)
-        self.ui.username.setText(QString(user.username))
-        self.ui.realname.setText(QString(user.realname))
-        self.ui.pass1.setText(QString(user.passwd))
-        self.ui.pass2.setText(QString(user.passwd))
+        self.ui.username.setText(user.username)
+        self.ui.realname.setText(user.realname)
+        self.ui.pass1.setText(user.passwd)
+        self.ui.pass2.setText(user.passwd)
 
         if "wheel" in user.groups:
             self.ui.admin.setChecked(True)
@@ -413,7 +413,7 @@ class UserItem(QListWidgetItem):
     # @param user (yali.users.User)
     def __init__(self, parent, pixmap, user):
         icon = QIcon(pixmap)
-        QListWidgetItem.__init__(self, icon, QString(user.username), parent)
+        QListWidgetItem.__init__(self, icon, user.username, parent)
         self._user = user
 
     def getUser(self):
