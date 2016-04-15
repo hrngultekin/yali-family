@@ -6,4 +6,22 @@ Dependencies
 python-pyaspects
 python-pyblock
 pyqtermwidget5
-
+panda
+pisilinux-desktop-services  (pds)
+python-qt5
+python-qt5-common
+python-qt5-devel
+python-sip2
+python-udev
+qt5
+qt5-devel
+qtermwidget
+qtermwidget-devel
+qt5-l10n
+sip
+sip-devel
+xdm
+yali
+yali-branding-pisilinux
+yali-theme-pisilinux
+zorg
