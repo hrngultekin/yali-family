@@ -86,7 +86,7 @@ class Widget(QWidget, ScreenWidget):
         subject = "<p><li><b>%s</b></li><ul>"
         item    = "<li>%s</li>"
         end     = "</ul></p>"
-        content = ""
+        content = []
 
         content.append("""<html><body><ul>""")
 
@@ -178,8 +178,8 @@ class Widget(QWidget, ScreenWidget):
             content.append(end)
 
         content.append("""</ul></body></html>""")
-
-        self.ui.content.setHtml(content)
+        cnt= "\n".join(content)
+        self.ui.content.setHtml(cnt)
 
     def execute(self):
         self.timer.stop()

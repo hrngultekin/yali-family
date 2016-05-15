@@ -92,7 +92,7 @@ class RaidEditor(object):
 
             # The user has to select some devices to be part of the array.
             if not raidmembers:
-                raidlevel = widget.raidLevels.itemData(widget.raidLevels.currentIndex()).toInt()[0]
+                raidlevel = int(widget.raidLevels.itemData(widget.raidLevels.currentIndex()))
                 self.intf.messageWindow(_("Invalid Raid Members"),
                                         _("A RAID%(level)d set requires at least %(min_member)d member")
                                         % {"level":raidlevel,
@@ -102,8 +102,8 @@ class RaidEditor(object):
 
             if not self.origrequest.exists:
                 formatType = str(widget.filesystemMenu.currentText())
-                raidminor = widget.raidMinors.itemData(widget.raidMinors.currentIndex()).toInt()[0]
-                raidlevel = widget.raidLevels.itemData(widget.raidLevels.currentIndex()).toInt()[0]
+                raidminor = int(widget.raidMinors.itemData(widget.raidMinors.currentIndex()))
+                raidlevel = int(widget.raidLevels.itemData(widget.raidLevels.currentIndex()))
 
                 if not raid.isRaid(raid.RAID0, raidlevel):
                     spares = widget.spareSpin.value()
@@ -278,7 +278,7 @@ class RaidWidget(QWidget, Ui_RaidWidget):
         self.buttonBox.rejected.connect(self.parent.dialog.reject)
 
     def raidLevelChanged(self, index):
-        raidlevel = self.raidLevels.itemData(index).toInt()[0]
+        raidlevel = int(self.raidLevels.itemData(index))
         availraidparts = self.parent.storage.unusedRaidMembers(array=self.origrequest)
         maxspares = raid.get_raid_max_spares(raidlevel, len(availraidparts))
 

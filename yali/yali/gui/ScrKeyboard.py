@@ -63,7 +63,6 @@ class Widget(QWidget, ScreenWidget):
 
     def slotLayoutChanged(self):
         index = self.ui.keyboard_list.currentIndex()
-        print dir(self.ui.keyboard_list.itemData(index))
         keymap = self.ui.keyboard_list.itemData(index)#.toMap()
         # Gökmen's converter
         keymap = dict(map(lambda x: (str(x[0]), unicode(x[1])), keymap.iteritems()))

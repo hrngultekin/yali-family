@@ -38,7 +38,7 @@ class ShrinkEditor:
 
             widget = self.dialog.content
 
-            request = widget.partitions.itemData(widget.partitions.currentIndex()).toPyObject()
+            request = widget.partitions.itemData(widget.partitions.currentIndex())#.toPyObject() burada hata olabilir
             newsize = widget.sizeSpin.value()
 
             try:
@@ -89,7 +89,7 @@ class ShrinkWidget(QtWidgets.QWidget, Ui_ShrinkPartitionWidget):
         self.updateSpin(0)
 
     def updateSpin(self, index):
-        request = self.partitions.itemData(index).toPyObject()
+        request = self.partitions.itemData(index)#.toPyObject() burada hata olabilir
         try:
             requestlower = 1
             requestupper = request.maxSize

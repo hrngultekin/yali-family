@@ -244,7 +244,7 @@ def main():
         from yali.storage import Storage
         ctx.storage = Storage()
     
-    
+    print "jhbjhb"
     if not ctx.bootloader:
         from yali.storage.bootloader import BootLoader
         ctx.bootloader = BootLoader(ctx.storage)

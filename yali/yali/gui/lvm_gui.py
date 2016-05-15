@@ -101,8 +101,8 @@ class LVMEditor(object):
                                               % (name,), type="warning")
                     continue
 
-            peSize = widget.physicalExtends.itemData(widget.physicalExtends.currentIndex()).toInt()[0] / 1024.0
-
+            peSize = int(widget.physicalExtends.itemData(widget.physicalExtends.currentIndex())) / 1024.0
+            
             origlvs = self.origrequest.lvs
             if not self.origrequest.exists:
                 ctx.logger.debug("non-existing vg -- setting up lvs, pvs, name, peSize")
@@ -288,7 +288,7 @@ class VolumeGroupWidget(QWidget, Ui_VolumeGroupWidget):
     def smallestPhysicalVolumeSize(self):
         first = 1
         minpvsize = 1
-        activePESize = self.physicalExtends.itemData(self.physicalExtends.currentIndex()).toFloat()[0]
+        activePESize = float(self.physicalExtends.itemData(self.physicalExtends.currentIndex()))#[0]
         for pv in self.selectedPhysicalVolumes:
             try:
                 peSize = activePESize / 1024.0
@@ -318,7 +318,7 @@ class VolumeGroupWidget(QWidget, Ui_VolumeGroupWidget):
         """ update sizes in pvs """
         for index, partition in enumerate(self.parent.availlvmparts):
             size = partition.size
-            peSize = self.physicalExtends.itemData(self.physicalExtends.currentIndex()).toFloat()[0] / 1024.0
+            peSize = float(self.physicalExtends.itemData(self.physicalExtends.currentIndex())) / 1024.0
             size = lvm.clampSize(size, peSize)
             prettysize = "%10.2f MB"  % size
             self.physicals.item(index).widget.labelDrive.setText("%s (%s)" % (partition.name, prettysize))
@@ -424,7 +424,7 @@ class VolumeGroupWidget(QWidget, Ui_VolumeGroupWidget):
 
             return 1
 
-        curpe = self.physicalExtends.itemData(index).toFloat()[0] / 1024.0
+        curpe = float(self.physicalExtends.itemData(index)) / 1024.0
         currentValue = curpe
         lastValue = self.origrequest.peSize
         maximumPhysicalSize = self.smallestPhysicalVolumeSize
@@ -689,7 +689,7 @@ class LogicalVolumeEditor:
                 size = self.origrequest.size
 
             # check that size specification is within limits
-            peSize = self.parent.physicalExtends.itemData(self.parent.physicalExtends.currentIndex()).toInt()[0] / 1024
+            peSize = int(self.parent.physicalExtends.itemData(self.parent.physicalExtends.currentIndex())) / 1024
             size = lvm.clampSize(size, peSize, roundup=True)
             maximumVolumeSize = lvm.getMaxLVSize()
             if size > maximumVolumeSize:
@@ -893,7 +893,8 @@ class LogicalVolumeWidget(QWidget, Ui_LogicalVolumeWidget):
     def mountPointChanged(self, index):
         if self.formatRadio.isVisible():
             self.radioButton.setChecked(True)
-            self.formatRadio.setChecked(self.mountpointMenu.itemData(index).toBool())
+            self.formatRadio.setChecked(self.mountpointMenu.itemData(index))
+            print "lvm_gui.py line 897 must be bool", type(self.mountpointMenu.itemData(index))
 
 class LogicalVolumeItem(QTreeWidgetItem):
     def __init__(self, parent, device):

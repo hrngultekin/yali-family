@@ -92,7 +92,7 @@ def fillResizablePartitions(widget, storage):
             if biggest == -1:
                 biggest = i
             else:
-                current = widget.itemData(biggest).toPyObject()
+                current = widget.itemData(biggest)#.toPyObject() burada hata olabilir
                 if partition.format.targetSize > current.format.targetSize:
                     biggest = i
 
@@ -205,7 +205,7 @@ def fillLvmPhysicals(widget):
     originalpvs = widget.parent().parent.pvs[:]
     peCombo = widget.parent().physicalExtends
     for device in widget.parent().parent.availlvmparts:
-        peSize = peCombo.itemData(peCombo.currentIndex()).toFloat()[0] / 1024.0
+        peSize = float(peCombo.itemData(peCombo.currentIndex())) / 1024.0
         size = "%10.2f MB" % lvm.clampSize(device.size, peSize)
         include = True
         selected = False

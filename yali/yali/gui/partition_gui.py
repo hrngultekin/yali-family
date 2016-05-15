@@ -326,4 +326,5 @@ class PartitionWidget(QtWidgets.QWidget, Ui_PartitionWidget):
 
         if self.formatRadio.isVisible():
             self.radioButton.setChecked(True)
-            self.formatRadio.setChecked(self.mountpointMenu.itemData(index).toBool())
+            print "partition_gui.py line 329 type must be bool ->", type(self.mountpointMenu.itemData(index))
+            self.formatRadio.setChecked(self.mountpointMenu.itemData(index))

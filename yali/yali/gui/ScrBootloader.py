@@ -121,6 +121,6 @@ class Widget(QWidget, ScreenWidget):
 
     def currentDeviceChanged(self, index):
         if index != -1:
-            self.device = self.ui.drives.itemData(index).toPyObject().name
+            self.device = self.ui.drives.itemData(index).name
 
 

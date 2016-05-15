@@ -374,7 +374,6 @@ class Widget(QWidget):
             #    weave_all_object_methods(ctx.aspect, screen)
 
             # enable navigation buttons before shown
-            print screen
             weave_object_method(enableNavButtonsAspect, screen, "shown")
             # disable navigation buttons before the execute.
             weave_object_method(disableNavButtonsAspect, screen, "execute")
