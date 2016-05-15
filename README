@@ -8,6 +8,7 @@ python-pyblock
 pyqtermwidget5
 panda
 pisilinux-desktop-services  (pds)
+pyparted
 python-qt5
 python-qt5-common
 python-qt5-devel
