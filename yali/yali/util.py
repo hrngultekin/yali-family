@@ -173,9 +173,11 @@ def isEfi():
     global efi
     if efi is not None:
         return efi
-
+    
     efi = False
-    if os.path.exists("/sys/firmware/efi"):
+    # use current kernel
+    if os.path.exists("/lib/modules/{}/kernel/drivers/firmware/efi".format(os.uname()[2])):#"/sys/firmware/efi"):
+        print "isEfi=true"
         efi = True
 
     return efi
